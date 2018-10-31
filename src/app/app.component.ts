@@ -17,7 +17,8 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: 'Home', component: 'HomePage' }
+      { title: 'Perfil', component: 'ProfilePage' },
+      { title: 'Categorias', component: 'CategoriasPage' }
     ];
 
   }
