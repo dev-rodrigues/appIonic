@@ -41,7 +41,7 @@ export class HomePage {
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
-
+  
   ionViewDidEnter() {
     this.auth.refreshToken()
         .subscribe(response => {
