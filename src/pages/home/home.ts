@@ -23,10 +23,28 @@ export class HomePage {
 
   }
 
+  ionViewWillEnter() {
+    this.menu.swipeEnable(false);
+  }
+
+    /*ERRO AO SAIR E AO ENTRAR QD O TOKEN TA NULLO*/
+  /* ionViewDidEnter() {
+    this.auth.refreshToken()
+        .subscribe(response => {
+          this.auth.successfulLogin(response.headers.get('Authorization'));
+          this.navCtrl.setRoot('CategoriasPage');
+        },
+        error =>{});  
+  } */
+
+  ionViewDidLeave() {
+    this.menu.swipeEnable(true);
+  }
+
   login() {
     this.auth.authenticate(this.creds)
         .subscribe(response => {
-          this.auth.sucessfullLogin(response.headers.get('Authorization'));
+          this.auth.successfulLogin(response.headers.get('Authorization'));
           this.navCtrl.setRoot('CategoriasPage');
         },
         error =>{
@@ -34,21 +52,7 @@ export class HomePage {
         });    
   }
 
-  ionViewWillEnter() {
-    this.menu.swipeEnable(false);
+  signup() {
+    this.navCtrl.push('SignupPage');
   }
-
-  ionViewDidLeave() {
-    this.menu.swipeEnable(true);
-  }
-  
-  ionViewDidEnter() {
-    this.auth.refreshToken()
-        .subscribe(response => {
-          this.auth.sucessfullLogin(response.headers.get('Authorization'));
-          this.navCtrl.setRoot('CategoriasPage');
-        },
-        error =>{});  
-  }
-
 }

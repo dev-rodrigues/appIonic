@@ -11,7 +11,9 @@ export class AuthService {
 
     jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor (public http: HttpClient, public storage: StorageService) {
+    constructor (
+        public http: HttpClient,
+        public storage: StorageService) {
 
     }
 
@@ -35,7 +37,7 @@ export class AuthService {
             });
     }
 
-    sucessfullLogin(authorizationValue : string) {
+    successfulLogin(authorizationValue : string) {
         let tok = authorizationValue.substring(7);
         let user : LocalUser = {
             token: tok,
