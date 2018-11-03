@@ -28,6 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             console.log(errorObj);
 
             switch(errorObj.status) {
+                
                 case 401:
                 this.handle401();
                 break;
