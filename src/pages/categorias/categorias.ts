@@ -22,14 +22,27 @@ export class CategoriasPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData() {
     this.categoriaService.findAll()
       .subscribe(response => {
         this.items = response;
       },
-      error => {});
-  }
+      error => {
+        
+      });
+  } 
 
   showProdutos(categoria_id : string) {
     this.navCtrl.push('ProdutosPage', {categoria_id: categoria_id});    
+  }
+
+  doRefresh(refresher) {
+    this.loadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 }
