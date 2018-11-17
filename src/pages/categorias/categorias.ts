@@ -11,25 +11,25 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class CategoriasPage {
 
-  items: CategoriaDTO[];
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
+  items: CategoriaDTO[];
+
   constructor(
-    public navCtrl: NavController,
+    public navCtrl: NavController, 
     public navParams: NavParams,
     public categoriaService: CategoriaService) {
   }
 
   ionViewDidLoad() {
     this.categoriaService.findAll()
-    .subscribe(response => {
-      this.items = response;
-    }, 
-    error => {});
+      .subscribe(response => {
+        this.items = response;
+      },
+      error => {});
   }
 
-  showProdutos(categoria_id: string) {
-    this.navCtrl.push('ProdutosPage', {categoria_id: categoria_id});
+  showProdutos(categoria_id : string) {
+    this.navCtrl.push('ProdutosPage', {categoria_id: categoria_id});    
   }
-
 }

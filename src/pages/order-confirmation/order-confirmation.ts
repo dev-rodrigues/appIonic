@@ -16,12 +16,10 @@ import { PedidoService } from '../../services/domain/pedido.service';
 export class OrderConfirmationPage {
 
   pedido: PedidoDTO;
-
   cartItems: CartItem[];
-
   cliente: ClienteDTO;
-
   endereco: EnderecoDTO;
+  codpedido: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -29,7 +27,8 @@ export class OrderConfirmationPage {
     public clienteService: ClienteService,
     public cartService: CartService,
     public pedidoService: PedidoService) {
-     this.pedido = this.navParams.get('pedido');
+
+    this.pedido = this.navParams.get('pedido');
   }
 
   ionViewDidLoad() {
@@ -49,24 +48,34 @@ export class OrderConfirmationPage {
     let position = list.findIndex(x => x.id == id);
     return list[position];
   }
-  
-  back() {
-    this.navCtrl.setRoot('CartPage');
-  }
 
   total() : number {
     return this.cartService.total();
   } 
 
+  back() {
+    this.navCtrl.setRoot('CartPage');
+  }
+
+  home() {
+    this.navCtrl.setRoot('CategoriasPage');
+  }
+
   checkout() {
     this.pedidoService.insert(this.pedido)
       .subscribe(response => {
         this.cartService.createOrClearCart();
+        this.codpedido = this.extractId(response.headers.get('location')); 
       },
       error => {
         if (error.status == 403) {
           this.navCtrl.setRoot('HomePage');
         }
       });
+  }
+
+  private extractId(location : string) : string {
+    let position = location.lastIndexOf('/');
+    return location.substring(position + 1, location.length);
   }
 }

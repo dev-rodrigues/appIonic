@@ -7,16 +7,16 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content body>
+<ion-content padding>
   <ion-fab padding right edge>
-    <button class="cart" position="padding" color="danger" navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
+    <button class="cart" position="padding" color="secondary" navPush="CartPage" ion-fab mini><ion-icon name="cart"></ion-icon></button>
   </ion-fab>
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="showProdutos(item.id)">
       <ion-thumbnail item-start>
         <img src="{{bucketUrl}}/cat{{item.id}}.jpg">
       </ion-thumbnail>
-      <h2> {{item.nome}} </h2>
+      <h2> {{ item.nome }} </h2>
     </button>
   </ion-list>
 </ion-content>
