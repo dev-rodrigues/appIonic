@@ -32,7 +32,9 @@ export class AuthService {
     refreshToken() {
         return this.http.post(
             `${API_CONFIG.baseUrl}/auth/refresh_token`, 
-            {},
+            {
+                
+            },
             {
                 observe: 'response',
                 responseType: 'text'
@@ -46,7 +48,6 @@ export class AuthService {
             email: this.jwtHelper.decodeToken(tok).sub
         };
         this.storage.setLocalUser(user);
-        /*LIMPA O CART QD O LOGIN É REALIZADO*/
         this.cartService.createOrClearCart();
     }
 
