@@ -35,17 +35,11 @@ constructor(
     
     this.produtoService.findByCategoria(categoria_id, this.page, 10)
       .subscribe(response => {
-        
         let start = this.items.length;
-        
         this.items = this.items.concat(response['content']);
-
         let end = this.items.length - 1;
-
         loader.dismiss();
-
         this.loadImageUrls(start, end);
-
       },
       error => {
         loader.dismiss();
@@ -54,15 +48,10 @@ constructor(
 
 
   loadImageUrls(start:number, end:number) {
-
     for (var i=start; i<=end; i++) {
-    
       let item = this.items[i];
-    
       this.produtoService.getSmallImageFromBucket(item.id)
-    
         .subscribe(response => {
-      
           item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
         },
         error => {
@@ -78,26 +67,19 @@ constructor(
   }
 
   presentLoading() {
-    
     let loader = this.loadingControl.create({
-    
       content: "Aguarde..."
-    
     });
-    
     loader.present();
-    
     return loader;
   }
 
   doRefresh(refresher) {
-    
+    this.page = 0;
+    this.items = [];
     this.loadData();
-    
     setTimeout(() => {
-    
       refresher.complete();
-    
     }, 1000);
   }
 
