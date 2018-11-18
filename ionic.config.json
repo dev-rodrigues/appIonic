@@ -1,5 +1,7 @@
 {
   "name": "httpsantos-app-ionic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }
