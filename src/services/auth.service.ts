@@ -12,16 +12,16 @@ export class AuthService {
 
     jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor (
+    constructor(
         public http: HttpClient,
         public storage: StorageService,
         public cartService: CartService) {
 
     }
 
-    authenticate(creds : CredenciaisDTO) {
+    authenticate(creds: CredenciaisDTO) {
         return this.http.post(
-            `${API_CONFIG.baseUrl}/login`, 
+            `${API_CONFIG.baseUrl}/login`,
             creds,
             {
                 observe: 'response',
@@ -31,9 +31,9 @@ export class AuthService {
 
     refreshToken() {
         return this.http.post(
-            `${API_CONFIG.baseUrl}/auth/refresh_token`, 
+            `${API_CONFIG.baseUrl}/auth/refresh_token`,
             {
-                
+
             },
             {
                 observe: 'response',
@@ -41,9 +41,9 @@ export class AuthService {
             });
     }
 
-    successfulLogin(authorizationValue : string) {
+    successfulLogin(authorizationValue: string) {
         let tok = authorizationValue.substring(7);
-        let user : LocalUser = {
+        let user: LocalUser = {
             token: tok,
             email: this.jwtHelper.decodeToken(tok).sub
         };
